@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import AddTeam from "./components/TeamCreate";
+import AddMatch from "./components/MatchCreate";
+import AddTournament from "./components/TournamentCreate";
+import MatchList from "./components/MatchList";
+import Leaderboard from "./components/Leadboard";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [tournamentId, setTournamentId] = useState<number | null>(() => {
+    const savedTournamentId = localStorage.getItem("tournamentId");
+    return savedTournamentId ? JSON.parse(savedTournamentId) : null;
+  });
+
+  const [teams, setTeams] = useState<any[]>(() => {
+    const savedTeams = localStorage.getItem("teams");
+    return savedTeams ? JSON.parse(savedTeams) : [];
+  });
+
+  const [matches, setMatches] = useState<any[]>(() => {
+    const savedMatches = localStorage.getItem("matches");
+    return savedMatches ? JSON.parse(savedMatches) : [];
+  });
+
+  useEffect(() => {
+    if (tournamentId !== null) {
+      localStorage.setItem("tournamentId", JSON.stringify(tournamentId));
+    }
+  }, [tournamentId]);
+
+  useEffect(() => {
+    if (teams.length > 0) {
+      localStorage.setItem("teams", JSON.stringify(teams));
+    }
+  }, [teams]);
+
+  useEffect(() => {
+    if (matches.length > 0) {
+      localStorage.setItem("matches", JSON.stringify(matches));
+    }
+  }, [matches]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-gray-100 p-8">
+      <h1 className="text-4xl font-extrabold text-center text-indigo-600 mb-8">
+        Badminton Tournament Management
+      </h1>
+      <div className="space-y-8">
+        <AddTournament setTournamentId={setTournamentId} />
 
-export default App
+        {tournamentId && (
+          <>
+            <AddTeam tournamentId={tournamentId} setTeams={setTeams} />
+            {teams.length > 0 && (
+              <>
+                <AddMatch
+                  tournamentId={tournamentId}
+                  teams={teams}
+                  setMatches={setMatches}
+                />
+                <MatchList tournamentId={tournamentId} />
+                <Leaderboard tournamentId={tournamentId} />
+              </>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
