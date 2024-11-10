@@ -42,7 +42,7 @@ const AddTournament: React.FC<AddTournamentProps> = ({ setTournamentId }) => {
         />
         <button
           onClick={handleSubmit}
-          className="w-full p-3 bg-black text-white rounded-lg shadow-md hover:bg-yellow-500 focus:ring-2 focus:ring-black"
+         className="w-full p-3 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-600"
         >
           Create Tournament
         </button>

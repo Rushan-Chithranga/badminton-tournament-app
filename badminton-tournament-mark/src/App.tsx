@@ -6,6 +6,7 @@ import AddMatch from "./components/MatchCreate";
 import AddTournament from "./components/TournamentCreate";
 import MatchList from "./components/MatchList";
 import Leaderboard from "./components/Leadboard";
+import Home from "./components/Home";
 
 const App: React.FC = () => {
   const [tournamentId, setTournamentId] = useState<number | null>(() => {
@@ -45,22 +46,35 @@ const App: React.FC = () => {
     <Router>
       <Layout>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route
-            path="/"
+            path="/add-tournament"
+            element={<AddTournament setTournamentId={setTournamentId} />}
+          />
+          <Route
+            path="/add-team"
             element={
-              <div>
-                <h2 className="text-3xl text-center">Welcome to the Tournament</h2>
-                <p className="text-center">
-                  Select an option from the menu to manage your tournament.
-                </p>
-              </div>
+              <AddTeam tournamentId={tournamentId!} setTeams={setTeams} />
             }
           />
-          <Route path="/add-tournament" element={<AddTournament setTournamentId={setTournamentId} />} />
-          <Route path="/add-team" element={<AddTeam tournamentId={tournamentId!} setTeams={setTeams} />} />
-          <Route path="/add-match" element={<AddMatch tournamentId={tournamentId!} teams={teams} setMatches={setMatches} />} />
-          <Route path="/leaderboard" element={<Leaderboard tournamentId={tournamentId!} />} />
-          <Route path="/match-list" element={<MatchList tournamentId={tournamentId!} />} />
+          <Route
+            path="/add-match"
+            element={
+              <AddMatch
+                tournamentId={tournamentId!}
+                teams={teams}
+                setMatches={setMatches}
+              />
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={<Leaderboard tournamentId={tournamentId!} />}
+          />
+          <Route
+            path="/match-list"
+            element={<MatchList tournamentId={tournamentId!} />}
+          />
         </Routes>
       </Layout>
     </Router>

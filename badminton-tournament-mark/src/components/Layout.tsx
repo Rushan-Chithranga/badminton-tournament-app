@@ -92,7 +92,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </nav>
       </header>
 
-      <main className="flex-1 bg-gray-100 p-8">{children}</main>
+      <main className="flex-1 bg-gray-900 p-8">{children}</main>
     </div>
   );
 };
