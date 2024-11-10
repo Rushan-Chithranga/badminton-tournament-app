@@ -17,7 +17,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ tournamentId }) => {
   console.log(teams);
   return (
     <div className="max-w-4xl mx-auto my-6">
-      <h2 className="text-2xl font-semibold text-center mb-6">Leaderboard</h2>
+      <h2 className="text-2xl font-semibold text-center text-white mb-6">Leaderboard</h2>
       <ul className="space-y-4">
         {teams.length > 0 ? (
           teams.map((team) => (
@@ -30,7 +30,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ tournamentId }) => {
             </li>
           ))
         ) : (
-          <div>No teams available for this tournament.</div>
+          <div className=" text-white">No teams available for this tournament.</div>
         )}
       </ul>
     </div>
