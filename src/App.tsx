@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout"; // Import the Layout component
+import Layout from "./components/Layout"; 
 import AddTeam from "./components/TeamCreate";
 import AddMatch from "./components/MatchCreate";
 import AddTournament from "./components/TournamentCreate";
