@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useTournamentStore from '../store';
 
 interface AddTournamentProps {
-  setTournamentId: (id: number) => void; // Pass the function to set the tournamentId
+  setTournamentId: (id: number) => void; 
 }
 
 const AddTournament: React.FC<AddTournamentProps> = ({ setTournamentId }) => {
@@ -18,7 +18,7 @@ const AddTournament: React.FC<AddTournamentProps> = ({ setTournamentId }) => {
       date,
     };
     addTournament(newTournament);
-    setTournamentId(newTournament.id);  // Set the tournamentId after creation
+    setTournamentId(newTournament.id);  
     setName('');
     setDate('');
   };
@@ -42,7 +42,7 @@ const AddTournament: React.FC<AddTournamentProps> = ({ setTournamentId }) => {
         />
         <button
           onClick={handleSubmit}
-          className="w-full p-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 bg-black text-white rounded-lg shadow-md hover:bg-yellow-500 focus:ring-2 focus:ring-black"
         >
           Create Tournament
         </button>

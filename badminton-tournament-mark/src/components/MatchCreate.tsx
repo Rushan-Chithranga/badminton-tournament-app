@@ -13,30 +13,32 @@ const AddMatch: React.FC<AddMatchProps> = ({
 }) => {
   const [team1, setTeam1] = useState<string>("");
   const [team2, setTeam2] = useState<string>("");
-  const [score1, setScore1] = useState<number>(0);
-  const [score2, setScore2] = useState<number>(0);
+  const [score1, setScore1] = useState<string>(""); // Change to string type
+  const [score2, setScore2] = useState<string>(""); // Change to string type
 
   const handleAddMatch = () => {
-    const winner = score1 > score2 ? team1 : score2 > score1 ? team2 : null;
+    // Parse the score inputs to numbers before comparing them
+    const parsedScore1 = Number(score1);
+    const parsedScore2 = Number(score2);
+
+    const winner = parsedScore1 > parsedScore2 ? team1 : parsedScore2 > parsedScore1 ? team2 : null;
 
     const newMatch = {
       id: Date.now(),
       tournamentId,
       team1,
       team2,
-      score1,
-      score2,
+      score1: parsedScore1,
+      score2: parsedScore2,
       winner,
     };
 
-    // Save match to localStorage or update Zustand state
     const updatedMatches = [
       ...JSON.parse(localStorage.getItem("matches") || "[]"),
       newMatch,
     ];
     localStorage.setItem("matches", JSON.stringify(updatedMatches));
 
-    // Update matches state
     setMatches(updatedMatches);
   };
 
@@ -72,24 +74,24 @@ const AddMatch: React.FC<AddMatchProps> = ({
 
         <div className="flex space-x-4">
           <input
-            type="number"
+            type="text" // Changed to text input
             className="w-full p-3 border rounded-lg text-gray-700 shadow-md focus:ring-2 focus:ring-blue-500"
             placeholder="Score 1"
             value={score1}
-            onChange={(e) => setScore1(Number(e.target.value))}
+            onChange={(e) => setScore1(e.target.value)} // Keep score as string
           />
           <input
-            type="number"
+            type="text" // Changed to text input
             className="w-full p-3 border rounded-lg text-gray-700 shadow-md focus:ring-2 focus:ring-blue-500"
             placeholder="Score 2"
             value={score2}
-            onChange={(e) => setScore2(Number(e.target.value))}
+            onChange={(e) => setScore2(e.target.value)} // Keep score as string
           />
         </div>
 
         <button
           onClick={handleAddMatch}
-          className="w-full p-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 bg-black text-white rounded-lg shadow-md hover:bg-yellow-500 focus:ring-2 focus:ring-black"
         >
           Add Match
         </button>

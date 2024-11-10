@@ -35,9 +35,16 @@ const MatchList: React.FC<MatchListProps> = ({ tournamentId }) => {
   ) => {
     const winner = score1 > score2 ? "team1" : score2 > score1 ? "team2" : null;
     useTournamentStore.getState().updateMatchScore(matchId, score1, score2);
-    useTournamentStore.getState().markMatchWinner(matchId, winner || ""); // Update the winner
+    useTournamentStore.getState().markMatchWinner(matchId, winner || "");
 
-    setEditMatchId(null); // Close editing mode
+    setEditMatchId(null);
+  };
+
+  const handleDeleteMatch = (matchId: number) => {
+    useTournamentStore.getState().deleteMatch(matchId); 
+    const updatedMatches = matches.filter((match) => match.id !== matchId);
+    setMatches(updatedMatches);
+    localStorage.setItem("matches", JSON.stringify(updatedMatches)); 
   };
 
   return (
@@ -46,7 +53,10 @@ const MatchList: React.FC<MatchListProps> = ({ tournamentId }) => {
         <p>No matches have been played yet.</p>
       ) : (
         matches.map((match) => (
-          <div key={match.id} className="p-4 bg-white shadow-md rounded-lg">
+          <div
+            key={match.id}
+            className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg relative"
+          >
             <div className="flex justify-between items-center">
               <p className="text-xl font-semibold">
                 {match.team1} vs {match.team2}
@@ -59,14 +69,14 @@ const MatchList: React.FC<MatchListProps> = ({ tournamentId }) => {
               {editMatchId === match.id ? (
                 <>
                   <input
-                    type="number"
+                    type="text"
                     className="w-16 p-2 border rounded"
                     value={editedScore1}
                     onChange={(e) => setEditedScore1(Number(e.target.value))}
                   />
                   <span> - </span>
                   <input
-                    type="number"
+                    type="text"
                     className="w-16 p-2 border rounded"
                     value={editedScore2}
                     onChange={(e) => setEditedScore2(Number(e.target.value))}
@@ -86,7 +96,7 @@ const MatchList: React.FC<MatchListProps> = ({ tournamentId }) => {
                   <button
                     className="ml-4 text-blue-600"
                     onClick={() => {
-                      setEditMatchId(match.id); // Set match to be edited
+                      setEditMatchId(match.id);
                       setEditedScore1(match.score1);
                       setEditedScore2(match.score2);
                     }}
@@ -96,6 +106,15 @@ const MatchList: React.FC<MatchListProps> = ({ tournamentId }) => {
                 </>
               )}
             </div>
+
+            {editMatchId !== match.id && (
+              <button
+                className="mt-4 w-full p-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700"
+                onClick={() => handleDeleteMatch(match.id)}
+              >
+                Delete
+              </button>
+            )}
           </div>
         ))
       )}

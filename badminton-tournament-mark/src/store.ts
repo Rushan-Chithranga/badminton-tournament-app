@@ -4,7 +4,7 @@ interface Team {
   id: number;
   name: string;
   tournamentId: number;
-  wins: number; // Track the number of matches won
+  wins: number;
 }
 
 interface Match {
@@ -78,7 +78,8 @@ const useTournamentStore = create<TournamentStore>((set) => {
 
     addTeam: (team) => {
       set((state) => {
-        const newTeams = [...state.teams, team];
+        const newTeam = { ...team, wins: 0 };
+        const newTeams = [...state.teams, newTeam];
         localStorage.setItem("teams", JSON.stringify(newTeams));
         return { teams: newTeams };
       });
@@ -107,17 +108,19 @@ const useTournamentStore = create<TournamentStore>((set) => {
         const updatedMatches = state.matches.map((match) =>
           match.id === matchId ? { ...match, winner } : match
         );
-
+    
         const updatedTeams = state.teams.map((team) =>
           team.name === winner ? { ...team, wins: team.wins + 1 } : team
         );
-
+    
         localStorage.setItem("matches", JSON.stringify(updatedMatches));
         localStorage.setItem("teams", JSON.stringify(updatedTeams));
-
+    
+        // Return updated state
         return { matches: updatedMatches, teams: updatedTeams };
       });
     },
+    
 
     deleteMatch: (matchId) => {
       set((state) => {
@@ -130,13 +133,11 @@ const useTournamentStore = create<TournamentStore>((set) => {
     },
 
     getLeaderboard: (tournamentId: number): Team[] => {
-      // Filter teams for the current tournament
       const teamsInTournament = useTournamentStore
         .getState()
         .teams.filter((team) => team.tournamentId === tournamentId);
 
-      // Sort teams by their wins in descending order
-      return teamsInTournament.sort((a, b) => b.wins - a.wins); // Sort by wins
+      return teamsInTournament.sort((a, b) => b.wins - a.wins);
     },
   };
 });
