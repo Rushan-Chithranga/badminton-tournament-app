@@ -3,6 +3,12 @@
 ## Overview
 The Badminton Tournament App is a mobile-responsive web application designed for managing and tracking badminton tournaments. Built using **React.js**, **Zustand**, and **Tailwind CSS**, the app provides an intuitive interface for creating tournaments, adding teams, updating match scores, and displaying a leaderboard.
 
+## Live Demo
+
+You can access the live application here: [![Badminton Tournament App](https://img.shields.io/badge/Live-Demo-blue?style=flat-square)](https://badminton-tournament.pages.dev/)
+
+---
+
 ![Home](public/Home.png)
 ![Create](public/create.png)
 
