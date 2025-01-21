@@ -5,7 +5,7 @@ The Badminton Tournament App is a mobile-responsive web application designed for
 
 ## Live Demo
 
-You can access the live application here: [![Badminton Tournament App](https://img.shields.io/badge/Live-Demo-blue?style=flat-square)](https://badminton-tournament.pages.dev/)
+You can access the live application here: <a href="https://badminton-tournament.pages.dev/" target="_blank"><img src="https://img.shields.io/badge/Live-Demo-blue?style=flat-square" alt="Badminton Tournament App"></a>
 
 ---
 
