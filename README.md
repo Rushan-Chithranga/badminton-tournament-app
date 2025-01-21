@@ -1,50 +1,111 @@
-# React + TypeScript + Vite
+# Badminton Tournament App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+The Badminton Tournament App is a mobile-responsive web application designed for managing and tracking badminton tournaments. Built using **React.js**, **Zustand**, and **Tailwind CSS**, the app provides an intuitive interface for creating tournaments, adding teams, updating match scores, and displaying a leaderboard.
 
-Currently, two official plugins are available:
+![Home](public/Home.png)
+![Create](public/create.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1. Tournament Management
+- Create new tournaments.
+- Add and organize teams within a tournament.
 
-- Configure the top-level `parserOptions` property like this:
+### 2. Team Management
+- Add teams participating in the tournament.
+- Assign team names and manage their details.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 3. Match Scoring
+- Add match scores for games between teams.
+- Real-time updates to the leaderboard based on match results.
+
+### 4. Leaderboard
+- Displays team rankings based on their scores.
+- Mobile-friendly and visually appealing layout.
+
+---
+
+## Tech Stack
+
+- **React.js**: For building a dynamic and responsive user interface.
+- **Zustand**: Lightweight state management for efficient handling of application state.
+- **Tailwind CSS**: For styling the application with customizable utility-first CSS classes.
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:Rushan-Chithranga/badminton-tournament-app.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd badminton-tournament-app
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open the app in your browser at `http://localhost:5173`.
+
+---
+
+## Folder Structure
+
+```
+.
+├── src
+│   ├── components          # Reusable React components
+│   ├── pages               # Pages like Tournaments, Teams, 
+│   ├── store               # Zustand store for state management
+│   ├── styles              # Tailwind CSS configurations
+│   └── utils               # Utility functions
+├── public                  # Static assets
+├── index.html              # HTML entry point
+└── package.json            # Project dependencies and scripts
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Usage
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Creating a Tournament
+1. Navigate to the **Tournaments** page.
+2. Click on `Create Tournament`.
+3. Enter the tournament name and details.
+4. Save the tournament.
+
+### Adding Teams
+1. Navigate to the **Teams** page.
+2. Click on `Add Team`.
+3. Provide the team name and other details.
+4. Save the team.
+
+### Updating Match Scores
+1. Go to the **Matches** page.
+2. Select a match and input scores for both teams.
+3. Save the scores to update the leaderboard.
+
+### Viewing the Leaderboard
+1. Access the **Leaderboard** page to view the current rankings.
+2. Rankings are automatically updated based on match results.
+
+---
+
+## Customization
+
+- Modify **Tailwind CSS** styles in `tailwind.config.js` to adjust the app's appearance.
+- Extend application features by adding new components or modifying existing ones.
+
